@@ -18,21 +18,27 @@ with open(datapath, newline='') as budgetdata:
         Date.append(column[0])
         Revenue.append(column[1])
 
-#convert Revenue list into int using comprehension
+#convert Revenue list into int using enumerate
 Revnums = [int(revenue) for revenue in Revenue]
 
-#total number of Months
+# #total number of Months
 Months = len(Date)
-print(Months)
-#total Revenue
+# #total Revenue
 Revsum = sum(Revnums)
-print(Revsum)
-#average Revenue
+# #average Revenue
 Revavg = Revsum / len(Revnums)
-print(Revavg)
-#max in Revenue
+# #determine max Revenue with Month
 Revmax = max(Revnums)
-print(Revmax)
-#min in Revenue
+# #determine min Revenue with Month
 Revmin = min(Revnums)
-print(Revmin)
+
+# #print to terminal
+print("`" * 3)
+print("Financial Analysis")
+print("-" * 28)
+print(f"Total Months: {Months}")
+print(f"Total Revenue: ${Revsum}")
+print(f"Average Revenue Change: ${Revavg}")
+print(f"Greatest Increase in Revenue: (${Revmax})")
+print(f"Greatest Decrease in Revenue: (${Revmin})")
+print("`" * 3)
