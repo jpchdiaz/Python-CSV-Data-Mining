@@ -1,7 +1,7 @@
 import csv
 
 #define where CSV is
-datapath = "raw_data/budget_data_2.csv"
+datapath = "raw_data/budget_data_1.csv"
 
 #storing contents of columns A and B
 Date = []
@@ -21,16 +21,18 @@ with open(datapath, newline='') as budgetdata:
 #convert Revenue list into int using enumerate
 Revnums = [int(revenue) for revenue in Revenue]
 
-# #total number of Months
+# total number of Months
 Months = len(Date)
-# #total Revenue
+# total Revenue
 Revsum = sum(Revnums)
-# #average Revenue
+# average Revenue
 Revavg = Revsum / len(Revnums)
-# #determine max Revenue with Month
+# determine max Revenue with Month
 Revmax = max(Revnums)
-# #determine min Revenue with Month
+Maxmonth = Date[Revnums.index(Revmax)]
+# determine min Revenue with Month
 Revmin = min(Revnums)
+Minmonth = Date[Revnums.index(Revmin)]
 
 # #print to terminal
 print("`" * 3)
@@ -39,6 +41,20 @@ print("-" * 28)
 print(f"Total Months: {Months}")
 print(f"Total Revenue: ${Revsum}")
 print(f"Average Revenue Change: ${Revavg}")
-print(f"Greatest Increase in Revenue: (${Revmax})")
-print(f"Greatest Decrease in Revenue: (${Revmin})")
+print(f"Greatest Increase in Revenue: {Maxmonth} (${Revmax})")
+print(f"Greatest Decrease in Revenue: {Minmonth} (${Revmin})")
 print("`" * 3)
+print(" ")
+print("Exporting as analysis.txt...")
+
+#print to file
+with open("analysis.txt", 'w') as textfile:
+    print("`" * 3, file=textfile)
+    print("Financial Analysis", file=textfile)
+    print("-" * 28, file=textfile)
+    print(f"Total Months: {Months}", file=textfile)
+    print(f"Total Revenue: ${Revsum}", file=textfile)
+    print(f"Average Revenue Change: ${Revavg}", file=textfile)
+    print(f"Greatest Increase in Revenue: {Maxmonth} (${Revmax})", file=textfile)
+    print(f"Greatest Decrease in Revenue: {Minmonth} (${Revmin})", file=textfile)
+    print("`" * 3, file=textfile)
