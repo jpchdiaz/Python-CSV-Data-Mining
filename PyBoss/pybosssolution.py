@@ -6,20 +6,6 @@ datapath = "raw_data/employee_data1.csv"
 
 new_employee_list = []
 
-#censors first 5 numbers of SSN. ugliest code i've written to date.
-def censor(ssnkey):
-    asterisks = "***-**"
-    for i in range(len(ssnkey)):
-        words = list(ssnkey[i])
-        del(words[0])
-        del(words[0])
-        del(words[0])
-        del(words[0])
-        del(words[0])
-        del(words[0])
-        ssnkey[i] = "".join(words)
-        ssnkey[i] = asterisks + ssnkey[i]
-
 with open(datapath) as csvfile:
     reader = csv.DictReader(csvfile)
     for row in reader:
@@ -32,7 +18,8 @@ with open(datapath) as csvfile:
         day = row["DOB"].split("-")[2]
         newdate = f"{month}/{day}/{year}"
         #SSN
-
+        lastssn = row["SSN"].split('-')[2]
+        newssn = f"***-**-{lastssn}"
         #State
         state = row["State"]
         new_employee_list.append(
