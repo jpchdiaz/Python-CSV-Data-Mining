@@ -1,7 +1,7 @@
 import csv
 
 #define where CSV is
-datapath = "raw_data/budget_data_1.csv"
+datapath = "raw_data/budget_data_2.csv"
 
 #storing contents of columns A and B
 Date = []
@@ -48,7 +48,7 @@ print(" ")
 print("Exporting as analysis.txt...")
 
 #print to file
-with open("analysis.txt", 'w') as textfile:
+with open("analysis2.txt", 'w') as textfile:
     print("`" * 3, file=textfile)
     print("Financial Analysis", file=textfile)
     print("-" * 28, file=textfile)

@@ -45,7 +45,7 @@ print("-------------------------")
 print("```")
 
 #Write to text file
-with open("results.txt", 'w') as textfile:
+with open("results_1.txt", 'w') as textfile:
     print("```", file=textfile)
     print("Election Results", file=textfile)
     print("-------------------------", file=textfile)

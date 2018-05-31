@@ -1,7 +1,7 @@
 import csv
 
 #define where csv is
-datapath = "raw_data/employee_data1.csv"
+datapath = "raw_data/employee_data2.csv"
 
 new_employee_list = []
 
@@ -61,4 +61,33 @@ us_state_abbrev = {
 with open(datapath) as csvfile:
     reader = csv.DictReader(csvfile)
     for row in reader:
-        print(f'{us_state_abbrev[row["State"]]}')
+        #Name
+        first = row["Name"].split()[0]
+        last = row["Name"].split()[1]
+        #DOB
+        year = row["DOB"].split("-")[0]
+        month = row["DOB"].split("-")[1]
+        day = row["DOB"].split("-")[2]
+        newdate = f"{month}/{day}/{year}"
+        #SSN
+        lastssn = row["SSN"].split('-')[2]
+        newssn = f"***-**-{lastssn}"
+        #State -- thanks, dictionaries.py from session 3!
+        state = row["State"]
+        abbrev = f"{us_state_abbrev[state]}"
+        new_employee_list.append(
+            {   "Emp ID": row["Emp ID"],
+                "First Name": row["Name"].split()[0],
+                "Last Name": row["Name"].split()[1],
+                "DOB": newdate,
+                "SSN": newssn,
+                "State": abbrev
+            }
+        )
+
+newpath = 'newemployees_2.csv'
+with open(newpath, "w", newline='') as csvfile:
+    fieldnames = ["Emp ID", "First Name", "Last Name", "DOB", "SSN", "State"]
+    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+    writer.writeheader()
+    writer.writerows(new_employee_list)
