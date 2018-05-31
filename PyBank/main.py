@@ -45,7 +45,7 @@ print(f"Greatest Increase in Revenue: {Maxmonth} (${Revmax})")
 print(f"Greatest Decrease in Revenue: {Minmonth} (${Revmin})")
 print("`" * 3)
 print(" ")
-print("Exporting as analysis.txt...")
+print("Exporting as analysis1.txt...")
 
 #print to file
 with open("analysis1.txt", 'w') as textfile:

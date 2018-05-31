@@ -28,8 +28,7 @@ Revsum = sum(Revnums)
 # average Revenue
 Revavg = Revsum / len(Revnums)
 # determine max Revenue with Month
-# Revmax = max(Revnums)
-
+Revmax = max(Revnums)
 Maxmonth = Date[Revnums.index(Revmax)]
 # determine min Revenue with Month
 Revmin = min(Revnums)
@@ -46,7 +45,7 @@ print(f"Greatest Increase in Revenue: {Maxmonth} (${Revmax})")
 print(f"Greatest Decrease in Revenue: {Minmonth} (${Revmin})")
 print("`" * 3)
 print(" ")
-print("Exporting as analysis.txt...")
+print("Exporting as analysis2.txt...")
 
 #print to file
 with open("analysis2.txt", 'w') as textfile:
