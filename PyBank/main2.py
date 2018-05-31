@@ -28,7 +28,8 @@ Revsum = sum(Revnums)
 # average Revenue
 Revavg = Revsum / len(Revnums)
 # determine max Revenue with Month
-Revmax = max(Revnums)
+# Revmax = max(Revnums)
+
 Maxmonth = Date[Revnums.index(Revmax)]
 # determine min Revenue with Month
 Revmin = min(Revnums)
