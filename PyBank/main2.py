@@ -7,6 +7,12 @@ datapath = "raw_data/budget_data_2.csv"
 Date = []
 Revenue = []
 
+prev_revenue = 0
+revenue_change = 0
+greatest_increase = ["", 0]
+greatest_decrease = ["", 9999999999999999999999]
+revenue_changes = []
+
 #open CSV to read
 with open(datapath, newline='') as budgetdata:
 
@@ -18,6 +24,22 @@ with open(datapath, newline='') as budgetdata:
         Date.append(column[0])
         Revenue.append(column[1])
 
+        #increase/decrease calculations
+        revenue_change = int(column[1]) - prev_revenue
+
+        #resets value of prev_revenue to row where analysis completed
+        prev_revenue = int(column[1])
+
+        if (revenue_change > greatest_increase[1]):
+            greatest_increase[1] = revenue_change
+            greatest_increase[0] = column[0]
+
+        if (revenue_change < greatest_decrease[1]):
+            greatest_decrease[1] = revenue_change
+            greatest_decrease[0] = column[0]
+
+        revenue_changes.append(int(column[1]))
+
 #convert Revenue list into int using enumerate
 Revnums = [int(revenue) for revenue in Revenue]
 
@@ -26,23 +48,17 @@ Months = len(Date)
 # total Revenue
 Revsum = sum(Revnums)
 # average Revenue
-Revavg = Revsum / len(Revnums)
-# determine max Revenue with Month
-Revmax = max(Revnums)
-Maxmonth = Date[Revnums.index(Revmax)]
-# determine min Revenue with Month
-Revmin = min(Revnums)
-Minmonth = Date[Revnums.index(Revmin)]
+Revavg = round(Revsum / len(Revnums), 2)
 
 # #print to terminal
 print("`" * 3)
-print("Financial Analysis")
+print("Financial Analysis for budget_data_2.txt")
 print("-" * 28)
 print(f"Total Months: {Months}")
 print(f"Total Revenue: ${Revsum}")
 print(f"Average Revenue Change: ${Revavg}")
-print(f"Greatest Increase in Revenue: {Maxmonth} (${Revmax})")
-print(f"Greatest Decrease in Revenue: {Minmonth} (${Revmin})")
+print(f"Greatest Increase in Revenue: {greatest_increase[0]} (${greatest_increase[1]})")
+print(f"Greatest Decrease in Revenue: {greatest_decrease[0]} (${greatest_decrease[1]})")
 print("`" * 3)
 print(" ")
 print("Exporting as analysis2.txt...")
@@ -55,6 +71,6 @@ with open("analysis2.txt", 'w') as textfile:
     print(f"Total Months: {Months}", file=textfile)
     print(f"Total Revenue: ${Revsum}", file=textfile)
     print(f"Average Revenue Change: ${Revavg}", file=textfile)
-    print(f"Greatest Increase in Revenue: {Maxmonth} (${Revmax})", file=textfile)
-    print(f"Greatest Decrease in Revenue: {Minmonth} (${Revmin})", file=textfile)
+    print(f"Greatest Increase in Revenue: {greatest_increase[0]} (${greatest_increase[1]})", file=textfile)
+    print(f"Greatest Increase in Revenue: {greatest_decrease[0]} (${greatest_decrease[1]})", file=textfile)
     print("`" * 3, file=textfile)

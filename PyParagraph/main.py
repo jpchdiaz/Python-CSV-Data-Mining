@@ -1,6 +1,6 @@
 import re
 #define where CSV is
-datapath = "raw_data/paragraph_3.txt"
+datapath = "raw_data/paragraph_1.txt"
 
 with open(datapath, 'r', encoding="UTF-8") as text:
     #read the file

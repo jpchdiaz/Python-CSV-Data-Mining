@@ -1,6 +1,6 @@
 import re
 #define where CSV is
-datapath = "raw_data/paragraph_3.txt"
+datapath = "raw_data/paragraph_2.txt"
 
 with open(datapath, 'r', encoding="UTF-8") as text:
     #read the file
@@ -12,9 +12,11 @@ with open(datapath, 'r', encoding="UTF-8") as text:
     sentences = len(re.split("(?<=[.!?]) +", lines))
     #Average letter count
     wordlist = lines.split(" ")
+    print(wordlist)
     avgword = sum(len(word) for word in wordlist) / len(wordlist)
     #Average sentence length
     senlist = re.split("(?<=[.!?]) +", lines)
+    print(senlist)
     avgsen = sum(len(sent.split()) for sent in senlist) / len(senlist)
 
 #print to terminal
